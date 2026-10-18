@@ -40,8 +40,8 @@
     .card { background: var(--card); border-radius: 14px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); }
     
     .card-caverna { background: var(--primary); color: white; border: none; }
-    .card-caverna h3 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #a3d9c0; margin-bottom: 6px; }
-    .card-caverna .day-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .card-caverna h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #a3d9c0; margin-bottom: 6px; }
+    .card-caverna .day-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
     .card-caverna p { font-size: 13px; line-height: 1.5; opacity: 0.95; }
     .card-caverna .challenge-box { background: rgba(255, 255, 255, 0.12); border-left: 3px solid #a3d9c0; padding: 10px; margin-top: 12px; border-radius: 0 8px 8px 0; font-size: 12px; }
 
@@ -51,7 +51,7 @@
 
     .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
     .stat-box { background: var(--card); padding: 16px; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
-    .stat-box .num { font-size: 28px; font-weight: 800; color: var(--primary); }
+    .stat-box .num { font-size: 26px; font-weight: 800; color: var(--primary); }
     .stat-box .label { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
     .task-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
@@ -59,11 +59,27 @@
     .task-item input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary); }
     .task-item label { font-size: 14px; line-height: 1.4; color: var(--text); cursor: pointer; }
 
+    .routine-list { display: flex; flex-direction: column; gap: 12px; }
+    .routine-row { display: flex; gap: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; font-size: 13px; }
+    .routine-row strong { color: var(--primary); min-width: 50px; }
+
+    .grid-30 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 12px; }
+    .grid-30 div { background: var(--bg); border: 1px solid var(--border); padding: 8px 0; text-align: center; font-size: 12px; font-weight: 600; border-radius: 6px; }
+    .grid-30 div.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* Estilos da Biblioteca */
+    .book-card { border-left: 4px solid var(--primary); background: var(--card); border-radius: 8px; padding: 14px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .book-title { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
+    .book-author { font-size: 12px; color: var(--muted); margin-bottom: 8px; font-style: italic; }
+    .book-summary { font-size: 13px; line-height: 1.4; color: var(--text); }
+    .book-bullets { font-size: 12px; margin-top: 8px; padding-left: 16px; color: var(--text); }
+    .pdf-viewer { width: 100%; height: 400px; border: 1px solid var(--border); border-radius: 8px; margin-top: 10px; display: none; }
+
     .btn { display: block; width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; text-align: center; margin-top: 8px; }
     .btn-secondary { background: #e0e6e2; color: var(--text); }
     .btn-danger { background: var(--danger); color: white; }
 
-    select, input[type="time"] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 14px; margin-top: 6px; margin-bottom: 12px; }
+    select, input[type="text"], input[type="file"], textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 14px; margin-top: 6px; margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -75,9 +91,12 @@
   </header>
 
   <nav id="nav">
-    <button class="active" onclick="switchTab('hoje')">Hoje</button>
-    <button onclick="switchTab('caverna')">Modo Caverna</button>
-    <button onclick="switchTab('notificacoes')">Notificações</button>
+    <button class="active" onclick="switchTab('hoje', this)">Hoje</button>
+    <button onclick="switchTab('biblioteca', this)">📚 Biblioteca</button>
+    <button onclick="switchTab('rotina', this)">Rotina</button>
+    <button onclick="switchTab('metas', this)">Metas</button>
+    <button onclick="switchTab('diario', this)">Diário</button>
+    <button onclick="switchTab('progresso', this)">Progresso</button>
   </nav>
 
   <div class="container">
@@ -85,14 +104,20 @@
     <!-- SEPARADOR HOJE -->
     <div id="hoje" class="tab-content active">
       
-      <!-- Mensagem Diária (Modo Caverna) -->
       <div class="card card-caverna">
-        <h3 id="piloto-dia-tag">MODO CAVERNA • DIA 1 DE 40</h3>
+        <h3 id="piloto-dia-tag">MODO CAVERNA • DIA 1 DE 30</h3>
         <div class="day-title" id="msg-titulo">1. A Arma do Sono</div>
         <p id="msg-corpo">Proteja o seu sono. 7 a 8 horas não são luxo, são vantagem competitiva. Rolar o feed até às 2h da manhã para "relaxar" é autossabotagem. Trate o seu sono como trata o seu trabalho.</p>
         <div class="challenge-box">
           <strong>Desafio de Hoje:</strong> <span id="msg-desafio">Telemóvel fora do alcance da cama 30 minutos antes de dormir. Zero ecrãs na cama.</span>
         </div>
+      </div>
+
+      <div style="margin-bottom: 12px;">
+        <label style="font-size: 12px; font-weight: 600;">Dia do programa:</label>
+        <select id="select-dia-main" onchange="mudarDiaPrograma()">
+          <!-- Preenchido via JS -->
+        </select>
       </div>
 
       <div class="stat-grid">
@@ -102,161 +127,322 @@
         </div>
         <div class="stat-box">
           <div class="num" id="streak-num">1</div>
-          <div class="label">Dia Consecutivo</div>
+          <div class="label">Dias Seguidos Completos</div>
         </div>
       </div>
 
       <div class="card">
         <h3>Tarefas do Dia</h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;" id="tarefas-status">0 de 5 tarefas concluídas</p>
+        
         <div class="task-item">
           <input type="checkbox" id="t1" onchange="updateProgress()">
           <label for="t1">Levantei-me no horário planeado e arrumei a cama</label>
         </div>
         <div class="task-item">
           <input type="checkbox" id="t2" onchange="updateProgress()">
-          <label for="t2">Dediquei tempo à vida espiritual / leitura</label>
+          <label for="t2">Dediquei tempo à minha vida espiritual</label>
         </div>
         <div class="task-item">
           <input type="checkbox" id="t3" onchange="updateProgress()">
-          <label for="t3">Concluí 1 tarefa profissional sem procrastinar</label>
+          <label for="t3">Concluí uma tarefa profissional sem procrastinar</label>
         </div>
         <div class="task-item">
           <input type="checkbox" id="t4" onchange="updateProgress()">
-          <label for="t4">Zero apostas e zero pornografia hoje</label>
+          <label for="t4">Passei o dia sem apostar e sem pornografia</label>
         </div>
         <div class="task-item">
           <input type="checkbox" id="t5" onchange="updateProgress()">
           <label for="t5">Fiz a revisão do dia com honestidade</label>
         </div>
-        <button class="btn" style="margin-top: 16px;" onclick="guardarDia()">Guardar Dia</button>
+
+        <button class="btn" style="margin-top: 16px;" onclick="guardarDia()">Guardar o dia</button>
+        <button class="btn btn-secondary" onclick="desmarcarTarefas()">Desmarcar tarefas</button>
       </div>
 
-      <!-- Botão de Emergência -->
       <div class="card card-alert">
-        <h4>Sintores Impulso ou Ansiedade?</h4>
-        <p>Se sentires vontade de apostar ou procrastinar, clica no botão abaixo para uma quarentena de 15 minutos.</p>
-        <button class="btn btn-danger" style="margin-top: 10px;" onclick="dispararEmergencia()">🚨 Botão de Emergência (Pára e Pensa)</button>
+        <h4>🚨 Botão de Emergência (Pára e Pensa)</h4>
+        <p>Se sentires um impulso forte para apostar ou procrastinar, clica abaixo para ativar a tua quarentena mental de 15 minutos.</p>
+        <button class="btn btn-danger" style="margin-top: 10px;" onclick="dispararEmergencia()">Activar Quarentena de Impulso</button>
       </div>
 
     </div>
 
-    <!-- SEPARADOR MODO CAVERNA -->
-    <div id="caverna" class="tab-content">
+    <!-- SEPARADOR BIBLIOTECA (NOVO) -->
+    <div id="biblioteca" class="tab-content">
+      
+      <!-- Leitor de PDF do Telemóvel -->
       <div class="card">
-        <h3>Selecionar Dia do Programa (1 a 30)</h3>
-        <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">Podes consultar as mensagens e princípios de qualquer dia do teu processo:</p>
-        <select id="select-dia-caverna" onchange="mudarDiaManual()">
-          <!-- Preenchido via JS -->
-        </select>
+        <h3>📖 Leitor de Livros em PDF</h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 8px;">Carrega um ficheiro PDF do teu telemóvel para ler diretamente aqui:</p>
+        <input type="file" id="pdf-input" accept="application/pdf" onchange="carregarPDFLocal(event)">
+        <iframe id="pdf-frame" class="pdf-viewer"></iframe>
       </div>
+
+      <!-- Resumos de Livros Essenciais -->
+      <div class="card">
+        <h3>💡 Resumos & Conceitos Chave</h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 14px;">Pilares de mentalidade financeira, disciplina e psicologia:</p>
+
+        <!-- Livro 1 -->
+        <div class="book-card">
+          <div class="book-title">O Homem Mais Rico da Babilónia</div>
+          <div class="book-author">George S. Clason</div>
+          <div class="book-summary">A riqueza não depende do quanto ganhas, mas do quanto conservas e fazes trabalhar para ti.</div>
+          <ul class="book-bullets">
+            <li><strong>Regra do Ouro:</strong> Guarda pelo menos 10% de tudo o que ganhas antes de pagar contas.</li>
+            <li><strong>Protege o teu capital:</strong> Não invistas em esquemas de ganho rápido nem jogues. Controla os teus gastos.</li>
+            <li><strong>A sorte favorece quem age:</strong> A sorte é o encontro da preparação com a oportunidade.</li>
+          </ul>
+        </div>
+
+        <!-- Livro 2 -->
+        <div class="book-card">
+          <div class="book-title">Trading in the Zone</div>
+          <div class="book-author">Mark Douglas</div>
+          <div class="book-summary">A chave do sucesso em mercados e negócios não é acertar sempre, mas sim dominar o medo e a ganância.</div>
+          <ul class="book-bullets">
+            <li><strong>Aceita o Risco:</strong> Cada operação ou decisão tem um resultado incerto. Nunca arrisques dinheiro que te tire o sono.</li>
+            <li><strong>Pensar em Probabilidades:</strong> Elimina a necessidade de "recuperar perdas". Aceita a perda como custo de negócio.</li>
+            <li><strong>Mente sem Ilusões:</strong> O mercado não te deve nada. Disciplina emocional é a única vantagem.</li>
+          </ul>
+        </div>
+
+        <!-- Livro 3 -->
+        <div class="book-card">
+          <div class="book-title">A Psicologia Financeira</div>
+          <div class="book-author">Morgan Housel</div>
+          <div class="book-summary">Fazer bem com o dinheiro tem pouco a ver com inteligência e muito a ver com o teu comportamento.</div>
+          <ul class="book-bullets">
+            <li><strong>A Riqueza é o que não vês:</strong> Riqueza é o dinheiro não gasto em símbolos de status.</li>
+            <li><strong>Margem de Segurança:</strong> Tem sempre uma reserva para imprevistos. O maior erro é depender da sorte.</li>
+            <li><strong>Saber dizer "Suficiente":</strong> O desejo insaciável de querer mais faz pessoas arriscarem o que têm e precisam.</li>
+          </ul>
+        </div>
+
+        <!-- Livro 4 -->
+        <div class="book-card">
+          <div class="book-title">Hábitos Atómicos</div>
+          <div class="book-author">James Clear</div>
+          <div class="book-summary">Mudanças de 1% todos os dias geram transformações gigantescas ao longo do tempo.</div>
+          <ul class="book-bullets">
+            <li><strong>Não foques só na meta, foca no sistema:</strong> A tua rotina diária é o que determina o teu resultado.</li>
+            <li><strong>Identidade:</strong> Não digas "estou a tentar parar de apostar". Dize "eu sou uma pessoa que não aposta".</li>
+            <li><strong>Torna o mau hábito difícil:</strong> Elimina atalhos, bloqueia apps e afasta-te do gatilho.</li>
+          </ul>
+        </div>
+
+        <!-- Livro 5 -->
+        <div class="book-card">
+          <div class="book-title">O Ego é Seu Inimigo</div>
+          <div class="book-author">Ryan Holiday</div>
+          <div class="book-summary">O orgulho e o ego destroçam planos e impedem o recomeço verdadeiro.</div>
+          <ul class="book-bullets">
+            <li><strong>Seja um estudante permanente:</strong> Aos 30 anos, aceita recomeçar com humildade.</li>
+            <li><strong>Trabalhe em silêncio:</strong> Menos conversa e mais execução diária.</li>
+            <li><strong>Reconheça os erros sem desculpas:</strong> Quem culpa os outros não evolui.</li>
+          </ul>
+        </div>
+
+      </div>
+
     </div>
 
-    <!-- SEPARADOR NOTIFICAÇÕES -->
-    <div id="notificacoes" class="tab-content">
+    <!-- SEPARADOR ROTINA -->
+    <div id="rotina" class="tab-content">
       <div class="card">
-        <h3>Lembretes Diários</h3>
-        <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">Configura os teus lembretes de rotina:</p>
+        <h3>Rotina diária sugerida</h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 16px;">Ajusta os horários à tua realidade e garante descanso suficiente.</p>
         
-        <label style="font-size: 12px; font-weight: 600;">Lembrete da Manhã</label>
-        <input type="time" value="08:00">
-
-        <label style="font-size: 12px; font-weight: 600;">Revisão da Noite</label>
-        <input type="time" value="20:30">
-
-        <button class="btn btn-secondary" onclick="testarNotificacao()">Testar Alerta Visual</button>
+        <div class="routine-list">
+          <div class="routine-row"><strong>08:00</strong><span>Acordar, água e arrumar a cama</span></div>
+          <div class="routine-row"><strong>08:05</strong><span>Oração e leitura bíblica / espiritual</span></div>
+          <div class="routine-row"><strong>08:30</strong><span>Higiene e movimento leve</span></div>
+          <div class="routine-row"><strong>08:45</strong><span>Escolher três tarefas essenciais do dia</span></div>
+          <div class="routine-row"><strong>09:00</strong><span>Bloco de trabalho focado ou procura de rendimento</span></div>
+          <div class="routine-row"><strong>12:00</strong><span>Resolver uma obrigação pessoal</span></div>
+          <div class="routine-row"><strong>14:00</strong><span>Leitura de 15 min na Biblioteca / Aprendizagem</span></div>
+          <div class="routine-row"><strong>16:00</strong><span>Trabalho, contactos e família</span></div>
+          <div class="routine-row"><strong>20:30</strong><span>Revisão do dia e registo no app</span></div>
+          <div class="routine-row"><strong>22:30</strong><span>Reduzir telefone e preparar descanso</span></div>
+        </div>
       </div>
-      <div class="card card-alert">
-        <h4>Compromisso Principal</h4>
-        <p><strong>Zero apostas durante o piloto.</strong> Não deposites nem tentes recuperar perdas. Remove atalhos e foca na tua reconstrução diária.</p>
+    </div>
+
+    <!-- SEPARADOR METAS SEMANAIS -->
+    <div id="metas" class="tab-content">
+      <div class="card">
+        <h3>Metas da Semana</h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">Compromissos inegociáveis para esta semana:</p>
+        
+        <div class="task-item">
+          <input type="checkbox" id="m1">
+          <label for="m1">Manter 7 dias seguidos sem apostas</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="m2">
+          <label for="m2">Ler pelo menos 1 resumo ou capítulo na Biblioteca diariamente</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="m3">
+          <label for="m3">Eliminar 1 sangramento financeiro / gasto inútil</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEPARADOR DIÁRIO -->
+    <div id="diario" class="tab-content">
+      <div class="card">
+        <h3>Diário pessoal</h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">Regista a realidade, não aquilo que gostarias que tivesse acontecido.</p>
+
+        <label style="font-size: 12px; font-weight: 600;">A que horas adormeceste?</label>
+        <select><option>22:00</option><option>23:00</option><option>00:00</option><option>01:00</option><option>02:00+</option></select>
+
+        <label style="font-size: 12px; font-weight: 600;">A que horas acordaste?</label>
+        <select><option>06:00</option><option>07:00</option><option>08:00</option><option>09:00</option><option>10:00+</option></select>
+
+        <label style="font-size: 12px; font-weight: 600;">Vontade de apostar / ceder a impulsos?</label>
+        <select><option>Nenhuma</option><option>Ligeira</option><option>Forte (mas controlei)</option><option>Recaída</option></select>
+
+        <label style="font-size: 12px; font-weight: 600;">O que fiz para lidar com os impulsos?</label>
+        <textarea rows="3" placeholder="Ex.: Afastei-me do telefone, li um resumo na Biblioteca..."></textarea>
+
+        <button class="btn" onclick="alert('Registo do diário guardado!')">Guardar Diário</button>
+      </div>
+    </div>
+
+    <!-- SEPARADOR PROGRESSO -->
+    <div id="progresso" class="tab-content">
+      <div class="card">
+        <h3>Progresso dos 30 dias</h3>
+        <div class="stat-grid" style="margin-top: 12px;">
+          <div class="stat-box"><div class="num" id="stat-dias-reg">1</div><div class="label">dias com registo</div></div>
+          <div class="stat-box"><div class="num" id="stat-tarefas-conc">0</div><div class="label">tarefas concluídas</div></div>
+          <div class="stat-box"><div class="num" id="stat-dias-limpos">1</div><div class="label">dias sem apostas</div></div>
+          <div class="stat-box"><div class="num" id="stat-taxa">0%</div><div class="label">taxa de conclusão</div></div>
+        </div>
+
+        <h4 style="font-size: 13px; margin-top: 16px;">Calendário de consistência</h4>
+        <div class="grid-30" id="calendario-grid">
+          <!-- 30 dias gerados via JS -->
+        </div>
       </div>
     </div>
 
   </div>
 
   <script>
-    // Banco de Mensagens dos 30 Dias (Pilares: Sono, Dopamina, Desapego, Rituais, Sangramento, Morte do Ego, Caverna)
     const mensagens30Dias = [
-      { titulo: "1. A Arma do Sono", corpo: "Proteja o seu sono. 7 a 8 horas não são luxo, são vantagem competitiva. Rolar o feed até às 2h para 'relaxar' é autossabotagem. Trate o seu sono como trata o seu trabalho.", desafio: "Telemóvel longe da cama 30 min antes de dormir. Zero ecrãs na cama." },
-      { titulo: "2. O Jejum de Dopamina", corpo: "Corte o entretenimento barato para o cérebro voltar a procurar o trabalho difícil. Se não lês 5 páginas sem pegar no telemóvel, o teu cérebro está frito de vídeos curtos.", desafio: "Elimina aplicações de entretenimento rápido ou coloca limites rígidos hoje." },
-      { titulo: "3. O Desapego do Passado", corpo: "Pare de guardar rancor do seu 'eu' do passado. Você não é mais aquela pessoa. Remoer no chuveiro com 'se eu tivesse investido aos 20' não paga contas hoje.", desafio: "Escreve num papel um erro do passado, rasga-o e foca-te 100% nas tuas ações de hoje." },
-      { titulo: "4. Crie um Ritual", corpo: "Rituais de manhã e de noite reduzem a ansiedade e o impulso. Chega de semana desorganizada. Siga os seus rituais todos os dias, sem negociar.", desafio: "Cumpre o checklist matinal e a revisão noturna exatamente no horário." },
-      { titulo: "5. O Sangramento Financeiro", corpo: "Cancele assinaturas inúteis e símbolos de status baratos. Cada centavo vai para a sua reconstrução. Pare de tentar impressionar estranhos.", desafio: "Regista e elimina 1 gasto fútil do teu orçamento semanal hoje." },
-      { titulo: "6. A Morte do Ego", corpo: "Aceite que está a recomeçar. Seja iniciante de novo sem deixar o orgulho atrapalhar. Esqueça a vergonha de recomeçar aos 30. Orgulho é o inimigo número um da sua reconstrução.", desafio: "Pede ajuda ou assume a tua fase atual de trabalho sem máscaras." },
-      { titulo: "7. A Fase da Caverna", corpo: "Desapareça por 40 dias. Ative o Modo Caverna e foque na sua base mental e financeira. Barzinho de sexta e conversa fiada só para fazer média? Corte e vá trabalhar.", desafio: "Diz 'não' a 1 convite ou distração social que te afaste do teu foco." },
-      { titulo: "8. A Armadilha da 'Recuperação'", corpo: "Tentar recuperar dinheiro perdido em apostas é o caminho mais rápido para perder o triplo. O dinheiro perdido foi o preço da tua lição. O dinheiro novo vem do trabalho.", desafio: "Zero sites de apostas ou gráficos de cassino abertos no ecrã." },
-      { titulo: "9. A Clareza do Ambiente", corpo: "O teu quarto e a tua mesa de trabalho refletem o estado da tua mente. Ambiente bagunçado gera ansiedade e decisões impulsivas.", desafio: "Arruma a tua mesa e o teu quarto antes de começar a trabalhar." },
-      { titulo: "10. Micro-Vitórias Diárias", corpo: "Grandes transformações são feitas de pequenas vitórias diárias. Se cumprires 5 pequenas tarefas hoje, ganhas o dia.", desafio: "Marca com visto as 5 tarefas do checklist hoje." },
-      // Repete os pilares consolidados para os restantes dias
-      { titulo: "11. Foco Pragmático", corpo: "Não procures motivação emocional; procura disciplina funcional. A motivação passa, a rotina fica.", desafio: "Executa a tarefa profissional mais difícil logo pela manhã." },
-      { titulo: "12. Blindagem de Gatilhos", corpo: "Identifica o momento em que a tua mente pede distração (cansaço, tédio ou solidão) e substitui por uma pausa física.", desafio: "Faz 15 flexões ou uma caminhada de 5 minutos se sentires tédio." },
-      { titulo: "13. Autonomia Financeira", corpo: "Guardar o teu capital é mais importante do que tentar multiplicá-lo de forma mágica. Respeita o teu trabalho.", desafio: "Revisa a tua conta bancária sem pânico e planeia a semana." },
-      { titulo: "14. A Regra dos 15 Minutos", corpo: "Qualquer impulso irracional atinge o pico e desce em 15 minutos. Respira e espera o pico passar.", desafio: "Usa o Botão de Emergência se sentir algum impulso forte." },
-      { titulo: "15. Metade do Caminho", corpo: "Dia 15 do Modo Caverna. A tua mente começou a desacelerar dos estímulos rápidos. Mantém a guarda alta.", desafio: "Revisa o teu progresso na app e celebra a consistência." }
+      { titulo: "1. A Arma do Sono", corpo: "Proteja o seu sono. 7 a 8 horas não são luxo, são vantagem competitiva. Rolar o feed até às 2h para 'relaxar' é autossabotagem. Trate o seu sono como trata o seu trabalho.", desafio: "Telemóvel fora do alcance da cama 30 minutos antes de dormir. Zero ecrãs na cama." },
+      { titulo: "2. O Jejum de Dopamina", corpo: "Corte o entretenimento barato para o cérebro voltar a procurar o trabalho difícil. Se não lês 5 páginas sem pegar no telemóvel, o teu cérebro está frito de estímulos fáceis.", desafio: "Corta redes sociais e vídeos curtos durante todo o dia de hoje." },
+      { titulo: "3. O Desapego do Passado", corpo: "Pare de guardar rancor do seu 'eu' do passado. Você não é mais aquela pessoa. Remoer no chuveiro com 'se eu tivesse feito X aos 20' não paga contas hoje.", desafio: "Foca 100% nas tuas decisões de hoje. O passado já acabou." },
+      { titulo: "4. Crie um Ritual", corpo: "Rituais de manhã e de noite reduzem a ansiedade e os impulsos. Chega de semana desorganizada. Siga os seus rituais todos os dias, sem negociar.", desafio: "Cumpre a rotina matinal e a revisão da noite exatamente nos horários." },
+      { titulo: "5. O Sangramento Financeiro", corpo: "Cancele assinaturas inúteis e símbolos de status baratos. Cada centavo vai para a sua reconstrução. Pare de tentar impressionar estranhos.", desafio: "Identifica e elimina 1 gasto fútil do teu orçamento esta semana." },
+      { titulo: "6. A Morte do Ego", corpo: "Aceite que está a recomeçar. Seja iniciante de novo sem deixar o orgulho atrapalhar. Esqueça a vergonha de recomeçar aos 30. Orgulho é o inimigo número um.", desafio: "Trabalha em silêncio com humildade total sem procurar validação externa." },
+      { titulo: "7. A Fase da Caverna", corpo: "Desapareça por 30 a 40 dias. Ative o Modo Caverna e foque na sua base mental e financeira. Barzinho e conversa fiada para fazer média? Corte e vá trabalhar.", desafio: "Diz 'não' a distrações sociais que te afastem do teu propósito hoje." },
+      { titulo: "8. A Ilusão da Recuperação", corpo: "Tentar recuperar dinheiro perdido em apostas é a armadilha para perder o triplo. O dinheiro perdido foi o custo da lição. O dinheiro novo vem do teu trabalho.", desafio: "Mantém zero contacto com plataformas ou gráficos de apostas." },
+      { titulo: "9. Clareza no Espaço", corpo: "A bagunça ao teu redor reflete a bagunça na tua mente. Um quarto desarrumado gera ansiedade e decisões impulsivas.", desafio: "Arruma o teu espaço de trabalho e a tua cama antes de começar o dia." },
+      { titulo: "10. Consistência Silenciosa", corpo: "Não precisas de anunciar os teus planos ao mundo. Resultados falam mais alto que palavras motivacionais.", desafio: "Conclui as tuas tarefas em silêncio absoluto sem postar nada em redes." },
+      { titulo: "11. Gestão da Energia", corpo: "A tua vontade diminui ao longo do dia. Toma as decisões mais importantes logo pela manhã quando a tua disciplina está no topo.", desafio: "Resolve a tarefa profissional mais exigente nas primeiras 2 horas do dia." },
+      { titulo: "12. A Regra dos 15 Minutos", corpo: "Qualquer impulso irracional atinge um pico e desce em 15 minutos. Respira fundo e espera a vaga passar sem agir.", desafio: "Usa o Botão de Emergência se sentir qualquer tentação ao longo do dia." },
+      { titulo: "13. O Valor do Trabalho Real", corpo: "Atalhos financeiros não existem. O verdadeiro património constrói-se com competências reais e valor entregue ao mercado.", desafio: "Dedica 1 hora inteira a aprender ou a aprimorar uma competência profissional útil." },
+      { titulo: "14. Domínio dos Lanches & Vícios", corpo: "A disciplina é uma só. Se cedes na alimentação ou na preguiça, a tua mente fica fraca para resistir aos vícios maiores.", desafio: "Mantém uma alimentação limpa e consciente durante todo o dia." },
+      { titulo: "15. Metade da Jornada", corpo: "Dia 15. A tua mente começou a desintoxicar dos picos de dopamina fácil. Mantém a guarda bem alta.", desafio: "Revisa o teu calendário de progresso e celebra 15 dias de reconstrução." },
+      { titulo: "16. Foco no Processo", corpo: "Não olhes para o topo da montanha; olha apenas para o próximo passo que vais dar hoje.", desafio: "Foca-te exclusivamente nas próximas 3 horas de trabalho." },
+      { titulo: "17. Eliminação de Atalhos", corpo: "Pessoas maduras assumem a responsabilidade pelo seu destino. Sem desculpas, sem culpar os outros.", desafio: "Assume a responsabilidade total por um problema pendente e resolve-o." },
+      { titulo: "18. Proteção da Mente", corpo: "Aquilo que consomes pelos olhos e ouvidos molda o teu caráter. Garanta que só consomes conteúdo construtivo.", desafio: "Substitui vídeos aleatórios por leitura de um livro na Biblioteca." },
+      { titulo: "19. Resiliência Operacional", corpo: "Dias maus vão acontecer. O diferencial de quem vence é continuar a cumprir o básico mesmo sem vontade.", desafio: "Cumpre todas as tarefas hoje mesmo se sentires cansaço ou apatia." },
+      { titulo: "20. O Poder do Não", corpo: "Dizer 'não' aos outros é dizer 'sim' a ti próprio e ao teu futuro.", desafio: "Recusa educadamente qualquer pedido que comprometa o teu tempo de foco." },
+      { titulo: "21. Domínio Financeiro", corpo: "Guardar e respeitar o dinheiro é a base da liberdade. Trata cada valor ganho com respeito e propósito.", desafio: "Registos e controlo financeiro atualizados." },
+      { titulo: "22. Clareza de Identidade", corpo: "Tu não és os teus erros passados. Tu és as tuas ações no momento presente.", desafio: "Age hoje como a pessoa responsável e disciplinada que estás a construir." },
+      { titulo: "23. Higiene Mental", corpo: "Caminhar ao ar livre e respirar sem ecrãs limpa o excesso de informação da mente.", desafio: "Faz uma caminhada de 20 minutos sem auscultadores nem telemóvel." },
+      { titulo: "24. Foco Extremo", corpo: "Multitasking é uma ilusão. Faz uma coisa de cada vez com 100% da tua atenção.", desafio: "Trabalha num único bloco focado sem alternar entre abas ou apps." },
+      { titulo: "25. Integridade Pessoal", corpo: "Cumprir as promessas que fazes a ti próprio é o segredo para construir uma autoestima inabalável.", desafio: "Honra a tua palavra em todas as tarefas do checklist hoje." },
+      { titulo: "26. Preparação para a Vida Real", corpo: "O Modo Caverna prepara-te para o mundo. O objetivo é saíres mais forte, mais maduro e estruturado.", desafio: "Define o teu plano para os próximos meses com clareza." },
+      { titulo: "27. Reconstrução de Relações", corpo: "A verdadeira maturidade traz paz às tuas relações interpessoais e à tua família.", desafio: "Tem uma interação positiva e presente com a tua família ou amigos." },
+      { titulo: "28. Solidez Emocional", corpo: "Não reajas a provocações ou ansiedade no momento. Cultiva o controlo e a calma interior.", desafio: "Pratica a pausa de 5 segundos antes de responder a qualquer frustração." },
+      { titulo: "29. O Novo Padrão", corpo: "O que era difícil no Dia 1 agora é o teu novo normal. A disciplina tornou-se a tua rotina.", desafio: "Compara a tua postura de hoje com a do início do programa." },
+      { titulo: "30. O Início do Novo Ciclo", corpo: "Completaste 30 dias de reconstrução consciente. O progresso continua, um dia de cada vez.", desafio: "Mantém os hábitos consolidados e projeta a tua próxima meta!" }
     ];
 
     let diaAtual = 1;
 
     function carregarDia(dia) {
       diaAtual = dia;
-      let msg = mensagens30Dias[(dia - 1) % mensagens30Dias.length];
-      document.getElementById('piloto-dia-tag').innerText = `MODO CAVERNA • DIA ${dia} DE 40`;
+      let msg = mensagens30Dias[dia - 1];
+      document.getElementById('piloto-dia-tag').innerText = `MODO CAVERNA • DIA ${dia} DE 30`;
       document.getElementById('msg-titulo').innerText = msg.titulo;
       document.getElementById('msg-corpo').innerText = msg.corpo;
       document.getElementById('msg-desafio').innerText = msg.desafio;
     }
 
-    function switchTab(tabId) {
+    function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      event.target.classList.add('active');
+      btn.classList.add('active');
     }
 
     function updateProgress() {
-      const checkboxes = document.querySelectorAll('#hoje input[type="checkbox"]');
+      const checkboxes = document.querySelectorAll('#hoje .task-item input[type="checkbox"]');
       let checked = 0;
       checkboxes.forEach(c => { if(c.checked) checked++; });
       let percent = Math.round((checked / checkboxes.length) * 100);
       document.getElementById('progresso-percent').innerText = percent + '%';
+      document.getElementById('tarefas-status').innerText = `${checked} de ${checkboxes.length} tarefas concluídas`;
+      document.getElementById('stat-tarefas-conc').innerText = checked;
+      document.getElementById('stat-taxa').innerText = percent + '%';
     }
 
     function guardarDia() {
-      alert('Dia ' + diaAtual + ' guardado com sucesso! Mantém o foco no Modo Caverna.');
+      alert(`Dia ${diaAtual} guardado com sucesso no navegador! Continua firme no Modo Caverna.`);
+    }
+
+    function desmarcarTarefas() {
+      document.querySelectorAll('#hoje input[type="checkbox"]').forEach(c => c.checked = false);
+      updateProgress();
     }
 
     function dispararEmergencia() {
-      alert('🚨 QUARENTENA DE IMPULSO ACTIVADA:\n\n1. Afasta-te do telemóvel/computador por 15 minutos.\n2. Bebe um copo de água fria.\n3. Lembra-te: O orgulho e as apostas não pagam as tuas contas. Preserva o teu capital!');
+      alert('🚨 QUARENTENA DE IMPULSO ACTIVADA:\n\n1. Afasta-te do ecrã durante 15 minutos.\n2. Bebe um copo de água fria e respira fundo.\n3. Lembra-te: O orgulho e as apostas não pagam contas. Protege o teu progresso e o teu capital!');
     }
 
-    function testarNotificacao() {
-      if ('Notification' in window) {
-        Notification.requestPermission().then(perm => {
-          alert('Permissão de Notificação: ' + perm);
-        });
+    function mudarDiaPrograma() {
+      let dia = parseInt(document.getElementById('select-dia-main').value);
+      carregarDia(dia);
+    }
+
+    function carregarPDFLocal(event) {
+      const file = event.target.files[0];
+      if (file && file.type === "application/pdf") {
+        const fileURL = URL.createObjectURL(file);
+        const iframe = document.getElementById("pdf-frame");
+        iframe.src = fileURL;
+        iframe.style.display = "block";
       } else {
-        alert('Notificações não suportadas neste navegador.');
+        alert("Por favor, seleciona um ficheiro PDF válido.");
       }
     }
 
-    // Inicialização
     window.onload = function() {
-      carregarDia(1);
-      
-      // Preencher select do Modo Caverna
-      let select = document.getElementById('select-dia-caverna');
+      let selectMain = document.getElementById('select-dia-main');
+      let gridCal = document.getElementById('calendario-grid');
+
       for(let i=1; i<=30; i++) {
         let opt = document.createElement('option');
         opt.value = i;
-        opt.innerHTML = 'Dia ' + i + ' - ' + (mensagens30Dias[i-1] ? mensagens30Dias[i-1].titulo : 'Princípio do Dia');
-        select.appendChild(opt);
-      }
-    };
+        opt.innerText = `Dia ${i}`;
+        selectMain.appendChild(opt);
 
-    function mudarDiaManual() {
-      let dia = document.getElementById('select-dia-caverna').value;
-      carregarDia(parseInt(dia));
-      switchTab('hoje');
-    }
+        let cell = document.createElement('div');
+        cell.innerText = i;
+        if(i === 1) cell.classList.add('active');
+        gridCal.appendChild(cell);
+      }
+
+      carregarDia(1);
+    };
   </script>
 </body>
 </html>
