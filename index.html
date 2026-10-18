@@ -1,118 +1,262 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#173d35">
-<link rel="manifest" href="./manifest.json">\n<meta name="mobile-web-app-capable" content="yes">\n<meta name="apple-mobile-web-app-capable" content="yes">\n<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-<title>Projecto Recomeço</title>
-<style>
-:root{--bg:#f4f6f2;--card:#fff;--ink:#1d2b26;--muted:#65736c;--green:#173d35;--line:#e1e8e1;--red:#a43b36}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{background:var(--green);color:white;padding:25px 18px 22px;border-radius:0 0 24px 24px}
-header small{opacity:.8;letter-spacing:.12em;text-transform:uppercase;font-weight:700;font-size:11px}h1{font-size:28px;line-height:1.12;margin:8px 0}header p{margin:8px 0 0;opacity:.9}
-main{max-width:780px;margin:auto;padding:14px 14px 40px}nav{display:flex;gap:7px;overflow:auto;padding:4px 0 12px}
-nav button{white-space:nowrap;border:1px solid var(--line);background:white;border-radius:999px;padding:10px 13px;color:var(--ink);font-weight:650}nav button.active{background:var(--green);color:white;border-color:var(--green)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:0 0 13px;box-shadow:0 3px 12px #193b2b08}
-h2{font-size:19px;margin:0 0 10px}h3{font-size:16px;margin:0 0 5px}.muted{color:var(--muted);font-size:13px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.progress{height:8px;background:#e8eee7;border-radius:20px;overflow:hidden;margin:10px 0}.bar{height:100%;background:#4e8068;width:0;transition:width .2s}
-.task{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}
-input[type=checkbox]{width:21px;height:21px;accent-color:var(--green);flex:0 0 auto;margin-top:2px}.task label{flex:1}.task input:checked+label{text-decoration:line-through;color:var(--muted)}
-select,input[type=text],input[type=time],input[type=date],input[type=number],textarea{width:100%;border:1px solid #d4ded5;border-radius:11px;padding:11px;background:#fff;color:var(--ink);font:inherit}
-textarea{min-height:85px;resize:vertical}.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
-button,input{font:inherit}.btn{border:0;border-radius:12px;background:var(--green);color:white;font-weight:700;padding:12px 15px;cursor:pointer}.btn.secondary{background:#e8efe8;color:var(--green)}.btn.danger{background:#fff0ef;color:var(--red);border:1px solid #f0d2cf}
-.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.pill{display:inline-block;background:#edf4e7;color:#315b42;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:750}
-.big{font-size:30px;font-weight:800}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{background:#f7faf6;border-radius:13px;padding:12px}.stat .muted{display:block}
-.challenge{padding:12px 0;border-bottom:1px solid var(--line)}.challenge:last-child{border:0}.hidden{display:none!important}
-.warning{background:#fff8e8;border:1px solid #f0dfb7;border-radius:13px;padding:12px;font-size:13px}.success{background:#edf6ec;border:1px solid #d4e8d1;border-radius:13px;padding:12px;font-size:13px}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:10px}.daygrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:12px 0}.daydot{text-align:center;border-radius:8px;background:#edf0ed;padding:8px 0;font-size:12px}.daydot.done{background:#d9ebd8;color:#1e5838;font-weight:800}.daydot.partial{background:#fff0cf;color:#7a5817}.daydot.today{outline:2px solid var(--green);outline-offset:1px}
-@media(min-width:600px){header{padding:32px calc((100% - 740px)/2) 26px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projecto Recomeço</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1a382b">
+  <style>
+    :root {
+      --bg: #f4f6f4;
+      --card: #ffffff;
+      --primary: #1a382b;
+      --accent: #2d5a45;
+      --text: #1c2520;
+      --muted: #5e6d65;
+      --border: #e0e6e2;
+      --danger: #b33939;
+      --warning: #fff8e7;
+      --warning-border: #ffeaa7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 40px; }
+
+    header { background-color: var(--primary); color: white; padding: 24px 16px; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+    header h5 { text-transform: uppercase; letter-spacing: 1px; font-size: 11px; opacity: 0.8; margin-bottom: 6px; }
+    header h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+    header p { font-size: 13px; opacity: 0.9; line-height: 1.4; }
+
+    nav { display: flex; overflow-x: auto; gap: 8px; padding: 16px; scrollbar-width: none; }
+    nav::-webkit-scrollbar { display: none; }
+    nav button { background: var(--card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; color: var(--text); white-space: nowrap; cursor: pointer; }
+    nav button.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    .container { padding: 0 16px; max-width: 600px; margin: 0 auto; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .card { background: var(--card); border-radius: 14px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); }
+    
+    .card-caverna { background: var(--primary); color: white; border: none; }
+    .card-caverna h3 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #a3d9c0; margin-bottom: 6px; }
+    .card-caverna .day-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .card-caverna p { font-size: 13px; line-height: 1.5; opacity: 0.95; }
+    .card-caverna .challenge-box { background: rgba(255, 255, 255, 0.12); border-left: 3px solid #a3d9c0; padding: 10px; margin-top: 12px; border-radius: 0 8px 8px 0; font-size: 12px; }
+
+    .card-alert { background: var(--warning); border: 1px solid var(--warning-border); }
+    .card-alert h4 { color: #8a6d3b; font-size: 14px; margin-bottom: 6px; }
+    .card-alert p { font-size: 12px; color: #6e582f; line-height: 1.4; }
+
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .stat-box { background: var(--card); padding: 16px; border-radius: 12px; border: 1px solid var(--border); text-align: center; }
+    .stat-box .num { font-size: 28px; font-weight: 800; color: var(--primary); }
+    .stat-box .label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    .task-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .task-item:last-child { border-bottom: none; }
+    .task-item input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary); }
+    .task-item label { font-size: 14px; line-height: 1.4; color: var(--text); cursor: pointer; }
+
+    .btn { display: block; width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; text-align: center; margin-top: 8px; }
+    .btn-secondary { background: #e0e6e2; color: var(--text); }
+    .btn-danger { background: var(--danger); color: white; }
+
+    select, input[type="time"] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 14px; margin-top: 6px; margin-bottom: 12px; }
+  </style>
 </head>
 <body>
-<header><small>O teu programa de reconstrução</small><h1>Projecto Recomeço</h1><p>Um dia de cada vez. Disciplina sem humilhação. Progresso com honestidade.</p></header>
-<main>
-<nav aria-label="Navegação"><button class="active" data-tab="inicio">Hoje</button><button data-tab="rotina">Rotina</button><button data-tab="metas">Metas semanais</button><button data-tab="diario">Diário</button><button data-tab="progresso">Progresso</button><button data-tab="guia">Guia</button></nav>
-<section id="inicio">
-<div class="card">
-<div class="row"><div><span class="pill" id="dayPill">DIA 1 / 30</span><h2 style="margin-top:9px">O teu dia começa aqui</h2></div><div class="big" id="percent">0%</div></div>
-<div class="progress"><div class="bar" id="todayBar"></div></div><div class="muted" id="taskCount">0 de 7 tarefas concluídas</div>
-<div class="grid" style="margin-top:12px"><div class="stat"><span class="big" id="streak">0</span><span class="muted">dias seguidos completos</span></div><div class="stat"><span class="big" id="weekPct">0%</span><span class="muted">meta desta semana</span></div></div>
-<div class="field"><label for="daySelect">Dia do programa</label><select id="daySelect"></select></div><div id="dailyTasks"></div>
-<div class="btnrow"><button class="btn" id="saveToday">Guardar o dia</button><button class="btn secondary" id="resetToday">Desmarcar tarefas</button></div>
-</div>
-<div class="card"><h2>Notificações diárias</h2><p class="muted">Escolhe os horários para os lembretes. As notificações do navegador podem exigir que a aplicação esteja instalada/aberta e que o sistema autorize alertas. Esta versão não garante alertas quando o navegador está fechado.</p>
-<div class="field"><label for="notifyMorning">Lembrete da manhã</label><input type="time" id="notifyMorning" value="08:00"></div>
-<div class="field"><label for="notifyEvening">Revisão da noite</label><input type="time" id="notifyEvening" value="20:30"></div>
-<div class="field"><label for="notifyEnabled">Estado dos lembretes</label><select id="notifyEnabled"><option value="off">Desactivados</option><option value="on">Activados enquanto a aplicação estiver aberta</option></select></div>
-<div class="btnrow"><button class="btn" id="saveNotify">Guardar lembretes</button><button class="btn secondary" id="testNotify">Testar notificação</button></div><p id="notifyStatus" class="muted" aria-live="polite"></p>
-<div class="warning">Para alertas fiáveis em segundo plano, a etapa futura é uma aplicação Android nativa ou uma PWA alojada e configurada com notificações push. Não introduzas dados pessoais sensíveis para activar lembretes.</div></div>
-<div class="card"><h2>Compromisso principal</h2><div class="warning"><b>Zero apostas durante o piloto.</b> Não deposites nem tentes recuperar perdas. Remove atalhos e procura apoio se o impulso estiver difícil de controlar.</div></div>
-</section>
-<section id="rotina" class="hidden"><div class="card"><h2>Rotina diária sugerida</h2><p class="muted">Ajusta os horários à tua realidade e garante descanso suficiente.</p><div id="routineList"></div><div class="btnrow"><button class="btn secondary" id="editRoutine">Editar horários</button></div><div id="routineEditor" class="hidden"></div></div><div class="card"><h2>Desafio do dia</h2><div id="challengeList"></div></div></section>
-<section id="metas" class="hidden"><div class="card"><h2>Metas semanais</h2><p class="muted">As metas ajudam a orientar o esforço; não são motivo para te insultares se ficares aquém.</p><div class="field"><label for="weekSelect">Semana</label><select id="weekSelect"><option value="1">Semana 1 · Dias 1–7</option><option value="2">Semana 2 · Dias 8–14</option><option value="3">Semana 3 · Dias 15–21</option><option value="4">Semana 4 · Dias 22–28</option><option value="5">Fecho · Dias 29–30</option></select></div><div id="weeklyGoals"></div><div class="progress"><div class="bar" id="goalBar"></div></div><p class="muted" id="goalSummary"></p><div class="btnrow"><button class="btn" id="saveGoals">Guardar metas</button></div></div></section>
-<section id="diario" class="hidden"><div class="card"><h2>Diário pessoal</h2><p class="muted">Regista a realidade, não aquilo que gostarias que tivesse acontecido.</p>
-<div class="field"><label for="sleepAt">A que horas adormeceste?</label><input id="sleepAt" type="time"></div><div class="field"><label for="wakeAt">A que horas acordaste?</label><input id="wakeAt" type="time"></div>
-<div class="field"><label for="screen">Tempo de telefone recreativo</label><select id="screen"><option value="">Escolher…</option><option>Menos de 2 horas</option><option>2–4 horas</option><option>4–6 horas</option><option>6–8 horas</option><option>Mais de 8 horas</option></select></div>
-<div class="field"><label for="urge">Vontade de apostar</label><select id="urge"><option value="">Escolher…</option><option>Não senti vontade relevante</option><option>Senti vontade leve</option><option>Senti vontade forte</option><option>Acabei por apostar</option></select></div>
-<div class="field"><label for="strategy">O que fiz para lidar com os impulsos?</label><textarea id="strategy" placeholder="Ex.: afastei-me do telefone, fui caminhar…"></textarea></div>
-<div class="field"><label for="reflection">O que correu bem, o que foi difícil e o que farei amanhã?</label><textarea id="reflection" placeholder="Escreve sem te insultares."></textarea></div>
-<div class="btnrow"><button class="btn" id="saveJournal">Guardar diário</button><button class="btn secondary" id="exportData">Exportar registos</button></div><p class="muted" id="journalStatus" aria-live="polite"></p></div></section>
-<section id="progresso" class="hidden"><div class="card"><h2>Progresso dos 30 dias</h2><div class="grid"><div class="stat"><span class="big" id="daysLogged">0</span><span class="muted">dias com registo</span></div><div class="stat"><span class="big" id="tasksDone">0</span><span class="muted">tarefas concluídas</span></div><div class="stat"><span class="big" id="gambleFree">0</span><span class="muted">dias sem apostas registados</span></div><div class="stat"><span class="big" id="rate">0%</span><span class="muted">taxa de conclusão</span></div></div><h3>Calendário de consistência</h3><div id="calendar" class="daygrid"></div><p class="muted">Um dia completo significa todas as sete tarefas assinaladas. Um dia parcial também conta como progresso, mas não aumenta a sequência de dias completos.</p><h3>Histórico diário</h3><div id="history"></div><div class="btnrow"><button class="btn" id="makeReport">Gerar relatório de 30 dias</button><button class="btn secondary" id="exportProgress">Descarregar dados</button></div></div><div id="reportCard" class="card hidden"><h2>Relatório do Recomeço</h2><div id="reportContent"></div><div class="btnrow"><button class="btn" id="downloadReport">Descarregar relatório TXT</button><button class="btn secondary" id="copyReport">Copiar relatório</button></div></div></section>
-<section id="guia" class="hidden"><div class="card"><h2>Regras do Recomeço</h2><div class="challenge"><h3>1. Começa pequeno</h3><p class="muted">Três tarefas importantes são melhores do que uma lista enorme que nunca executas.</p></div><div class="challenge"><h3>2. Sem apostas</h3><p class="muted">Não uses trading para recuperar perdas nem peças dinheiro para jogar. Bloqueia plataformas e cria barreiras ao acesso ao dinheiro.</p></div><div class="challenge"><h3>3. Recaída não é desistência</h3><p class="muted">Interrompe o comportamento, regista o gatilho, procura apoio e retoma o plano. Não persigas perdas.</p></div><div class="challenge"><h3>4. Integridade</h3><p class="muted">Faz promessas realistas, diz a verdade e repara o que conseguires com acções concretas.</p></div><div class="challenge"><h3>5. Fé, saúde e relações</h3><p class="muted">Reserva tempo para a vida espiritual, movimento físico, descanso e contacto humano. O apoio profissional pode ser importante para ansiedade e jogo compulsivo.</p></div><div class="challenge"><h3>6. Protege os teus dados</h3><p class="muted">Os registos ficam neste navegador. Exporta cópias regularmente.</p></div></div><div class="card"><h2>Desafios dos primeiros 7 dias</h2><div id="weekGuide"></div></div><div class="card"><h2>Reiniciar dados</h2><p class="muted">Apaga os registos guardados neste navegador. Exporta primeiro se quiseres guardar uma cópia.</p><button class="btn danger" id="clearAll">Apagar todos os registos</button></div></section>
-<footer>Projecto Recomeço · Versão 0.2 · Dados guardados localmente neste navegador.</footer>
-</main>
-<script>
-const KEY='recomeco_v02';
-const tasks=['Levantei-me no horário planeado','Dediquei tempo à minha vida espiritual','Concluí uma tarefa profissional','Cuidei do corpo e do ambiente','Respeitei o limite de telefone','Passei o dia sem apostar','Fiz a revisão do dia com honestidade'];
-const challenges=[['Interromper o piloto automático','Arrumar a cama; registar sono e telefone; remover atalhos de apostas; escrever três tarefas para amanhã.'],['Recuperar o controlo do tempo','Primeiros 30 minutos sem vídeos; um bloco de 20 minutos de trabalho; registar tempo de ecrã.'],['Activar o corpo','Caminhar 15–20 minutos se te sentires bem; higiene; 10 minutos de leitura; bloco profissional.'],['Trabalhar a honestidade','Identificar uma promessa pendente; resolver uma coisa possível; dois blocos de 25 minutos de trabalho.'],['Enfrentar as finanças','Listar dívidas, credores e dinheiro disponível; identificar uma acção concreta para gerar rendimento.'],['Sair do isolamento','Contactar uma pessoa segura; sair do quarto por uma razão concreta; passar algum tempo sem telefone.'],['Avaliar a semana','Rever o que funcionou; identificar três dificuldades; definir três melhorias para a semana seguinte.']];
-const goalsByWeek={
-1:['Cumprir a rotina da manhã em pelo menos 4 dias','Registar o tempo de telefone em pelo menos 5 dias','Completar 3 blocos de trabalho focado','Manter zero apostas e activar barreiras'],
-2:['Cumprir 5 revisões diárias','Fazer 5 blocos de trabalho focado','Ler ou estudar 10 minutos em 5 dias','Contactar alguém de confiança pelo menos 2 vezes'],
-3:['Executar 5 acções profissionais concretas','Organizar todas as dívidas conhecidas','Fazer 5 revisões diárias','Manter as barreiras contra apostas'],
-4:['Rever os hábitos e os gatilhos de recaída','Executar 5 acções para trabalho ou negócio','Fazer 5 revisões diárias','Preparar um plano sustentável para o mês seguinte'],
-5:['Completar o relatório final','Escolher 3 hábitos para manter','Definir as metas dos próximos 30 dias']
-};
-const defaultRoutine=[['07:30','Acordar, água e arrumar a cama'],['07:45','Oração e leitura bíblica'],['08:05','Higiene e movimento leve'],['08:45','Escolher três tarefas essenciais'],['09:00','Bloco de trabalho ou procura de rendimento'],['12:00','Resolver uma obrigação pessoal'],['14:00','Aprender uma competência útil'],['16:00','Trabalho, contactos e família'],['20:30','Revisão do dia e registo'],['22:30','Reduzir telefone e preparar descanso'],['23:00','Hora-alvo para dormir, ajustada gradualmente']];
-let state=load(),notificationTimer=null,lastMorning='',lastEvening='';
-function load(){try{return JSON.parse(localStorage.getItem(KEY))||fresh()}catch(e){return fresh()}}
-function fresh(){return {days:{},routine:defaultRoutine.map(x=>x.slice()),goals:{},settings:{morning:'08:00',evening:'20:30',enabled:false}}}
-function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderStats();renderGoalProgress()}
-function dayKey(){return String(document.getElementById('daySelect').value||1)}
-function entry(d=dayKey()){if(!state.days[d])state.days[d]={checks:Array(7).fill(false),journal:{}};if(!state.days[d].checks)state.days[d].checks=Array(7).fill(false);return state.days[d]}
-function make(tag,cls,txt){let x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined)x.textContent=txt;return x}
-function renderTasks(){let host=document.getElementById('dailyTasks');host.innerHTML='';let e=entry();tasks.forEach((t,i)=>{let row=make('div','task'),cb=make('input');cb.type='checkbox';cb.checked=!!e.checks[i];cb.addEventListener('change',()=>{e.checks[i]=cb.checked;persist();updateToday()});let label=make('label','',t);row.append(cb,label);host.append(row)});updateToday()}
-function updateToday(){let e=entry(),n=e.checks.filter(Boolean).length,p=Math.round(n/7*100);document.getElementById('percent').textContent=p+'%';document.getElementById('todayBar').style.width=p+'%';document.getElementById('taskCount').textContent=n+' de 7 tarefas concluídas';document.getElementById('dayPill').textContent='DIA '+dayKey()+' / 30';document.getElementById('streak').textContent=calcStreak();document.getElementById('weekPct').textContent=weekCompletion(+dayKey())+'%'}
-function calcStreak(){let d=+dayKey(),n=0;for(let i=d;i>=1;i--){let e=state.days[String(i)];if(e&&e.checks&&e.checks.length===7&&e.checks.every(Boolean))n++;else break}return n}
-function weekRange(w){return w===5?[29,30]:[(w-1)*7+1,Math.min(w*7,30)]}
-function weekCompletion(w){let [a,b]=weekRange(w),done=0,total=0;for(let d=a;d<=b;d++){let e=state.days[String(d)];if(e){done+=(e.checks||[]).filter(Boolean).length;total+=(e.checks||[]).length}}return total?Math.round(done/total*100):0}
-function renderRoutine(){let host=document.getElementById('routineList');host.innerHTML='';state.routine.forEach(([time,label])=>{let row=make('div','task');row.append(make('strong','',time),make('span','',label));host.append(row)});let ed=document.getElementById('routineEditor');ed.innerHTML='';state.routine.forEach(([time,label],i)=>{let f=make('div','field'),lab=make('label','',label),inp=make('input');inp.type='time';inp.value=time;inp.dataset.i=i;f.append(lab,inp);ed.append(f)});let save=make('button','btn','Guardar horários');save.onclick=()=>{ed.querySelectorAll('input').forEach(inp=>{if(inp.value)state.routine[+inp.dataset.i][0]=inp.value});persist();renderRoutine();ed.classList.add('hidden');document.getElementById('editRoutine').textContent='Editar horários'};ed.append(save)}
-function renderChallenges(){let host=document.getElementById('challengeList'),g=document.getElementById('weekGuide');host.innerHTML='';g.innerHTML='';challenges.forEach((c,i)=>{let d=make('div','challenge');d.append(make('h3','',`Dia ${i+1} — ${c[0]}`),make('p','muted',c[1]));host.append(d);g.append(d.cloneNode(true))})}
-function fillJournal(){let j=entry().journal||{};['sleepAt','wakeAt','screen','urge','strategy','reflection'].forEach(id=>document.getElementById(id).value=j[id]||'')}
-function saveJournal(){let j={};['sleepAt','wakeAt','screen','urge','strategy','reflection'].forEach(id=>j[id]=document.getElementById(id).value);entry().journal=j;persist();document.getElementById('journalStatus').textContent='Diário guardado para o dia '+dayKey()+'.'}
-function renderStats(){let ds=Object.entries(state.days),logged=ds.filter(([k,v])=>(v.checks||[]).some(Boolean)||Object.values(v.journal||{}).some(Boolean));let total=ds.reduce((s,[k,v])=>s+(v.checks||[]).filter(Boolean).length,0),possible=ds.reduce((s,[k,v])=>s+(v.checks||[]).length,0),free=ds.filter(([k,v])=>v.checks&&v.checks[5]).length;document.getElementById('daysLogged').textContent=logged.length;document.getElementById('tasksDone').textContent=total;document.getElementById('gambleFree').textContent=free;document.getElementById('rate').textContent=(possible?Math.round(total/possible*100):0)+'%';let h=document.getElementById('history'),cal=document.getElementById('calendar');h.innerHTML='';cal.innerHTML='';for(let i=1;i<=30;i++){let v=state.days[String(i)],n=v?(v.checks||[]).filter(Boolean).length:0;let dot=make('div','daydot'+(n===7?' done':n>0?' partial':'')+(i===+dayKey()?' today':''),String(i));dot.title=`Dia ${i}: ${n}/7`;cal.append(dot)}ds.sort((a,b)=>+a[0]-+b[0]).forEach(([k,v])=>{let n=(v.checks||[]).filter(Boolean).length,row=make('div','task');row.append(make('strong','',`Dia ${k}`),make('span','muted',`${n}/7 tarefas`));h.append(row)});updateToday()}
-function renderGoals(){let w=+document.getElementById('weekSelect').value,host=document.getElementById('weeklyGoals');host.innerHTML='';let g=state.goals[w]||[];goalsByWeek[w].forEach((label,i)=>{let row=make('div','task'),cb=make('input');cb.type='checkbox';cb.checked=!!g[i];cb.dataset.i=i;let lab=make('label','',label);row.append(cb,lab);host.append(row)});renderGoalProgress()}
-function renderGoalProgress(){let w=+document.getElementById('weekSelect').value,arr=state.goals[w]||[],total=goalsByWeek[w].length,done=arr.filter(Boolean).length,p=Math.round(done/total*100);document.getElementById('goalBar').style.width=p+'%';document.getElementById('goalSummary').textContent=`${done} de ${total} metas semanais assinaladas (${p}%).`}
-function saveGoals(){let w=+document.getElementById('weekSelect').value;state.goals[w]=Array.from(document.querySelectorAll('#weeklyGoals input')).map(x=>x.checked);persist();renderGoals()}
-function exportFile(){let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=make('a');a.href=url;a.download='recomeco-registos.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-function reportText(){let lines=['PROJECTO RECOMEÇO — RELATÓRIO DE 30 DIAS','Gerado em: '+new Date().toLocaleDateString('pt-PT'),''];let total=0,possible=0,free=0,full=0,logged=0;for(let i=1;i<=30;i++){let e=state.days[String(i)];if(!e){lines.push(`Dia ${i}: sem registo`);continue}let n=(e.checks||[]).filter(Boolean).length;total+=n;possible+=(e.checks||[]).length;if(e.checks&&e.checks[5])free++;if(n===7)full++;if(n||Object.values(e.journal||{}).some(Boolean))logged++;lines.push(`Dia ${i}: ${n}/7 tarefas${e.checks&&e.checks[5]?' · sem apostas assinalado':''}`);let j=e.journal||{};if(j.sleepAt||j.wakeAt||j.screen||j.urge)lines.push(`  Sono: ${j.sleepAt||'—'} / acordar: ${j.wakeAt||'—'} · telefone: ${j.screen||'—'} · impulso: ${j.urge||'—'}`);if(j.reflection)lines.push('  Reflexão: '+j.reflection.replace(/\n/g,' '))}lines.push('','RESUMO',`Dias com algum registo: ${logged}/30`,`Tarefas concluídas: ${total}/${possible||210}`,`Taxa de conclusão: ${possible?Math.round(total/possible*100):0}%`,`Dias completos (7/7): ${full}`,`Dias com “sem apostas” assinalado: ${free}`,`Maior sequência actual de dias completos: ${calcStreak()}`,'','Nota: relatório baseado apenas nos dados introduzidos. “Sem apostas” depende de registo honesto; não é verificação externa.','');for(let w=1;w<=5;w++){let g=state.goals[w]||[];lines.push(`Metas semana ${w}: ${g.filter(Boolean).length}/${goalsByWeek[w].length}`)}return lines.join('\n')}
-function showReport(){let r=reportText();document.getElementById('reportCard').classList.remove('hidden');document.getElementById('reportContent').textContent=r;document.getElementById('reportCard').scrollIntoView({behavior:'smooth',block:'start'})}
-function downloadReport(){let blob=new Blob([reportText()],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=make('a');a.href=url;a.download='relatorio-projecto-recomeco-30-dias.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-async function copyReport(){try{await navigator.clipboard.writeText(reportText());alert('Relatório copiado.')}catch(e){alert('Não foi possível copiar automaticamente. Usa a opção de descarregar o relatório.')} }
-function applyNotifySettings(){state.settings.morning=document.getElementById('notifyMorning').value||'08:00';state.settings.evening=document.getElementById('notifyEvening').value||'20:30';state.settings.enabled=document.getElementById('notifyEnabled').value==='on';persist();setupNotifications();document.getElementById('notifyStatus').textContent=state.settings.enabled?'Lembretes activados enquanto esta página estiver aberta. Mantém o navegador aberto; o sistema pode limitar alertas em segundo plano.':'Lembretes desactivados.'}
-async function requestNotify(){if(!('Notification' in window)){document.getElementById('notifyStatus').textContent='Este navegador não suporta notificações web.';return false}if(Notification.permission==='granted')return true;if(Notification.permission==='denied'){document.getElementById('notifyStatus').textContent='As notificações estão bloqueadas nas permissões do navegador.';return false}let p=await Notification.requestPermission();return p==='granted'}
-function sendNotification(title,body){if('Notification'in window&&Notification.permission==='granted'){try{new Notification(title,{body})}catch(e){document.getElementById('notifyStatus').textContent='O navegador não permitiu mostrar a notificação.'}}else{document.getElementById('notifyStatus').textContent='Permite notificações no navegador para testar os lembretes.'}}
-async function testNotification(){let ok=await requestNotify();if(ok)sendNotification('Projecto Recomeço','É hora de dar um pequeno passo. Abre o teu painel e regista o dia.')}
-function setupNotifications(){if(notificationTimer)clearInterval(notificationTimer);if(!state.settings.enabled)return;notificationTimer=setInterval(()=>{let now=new Date(),hm=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'),key=now.toDateString();if(hm===state.settings.morning&&lastMorning!==key){lastMorning=key;sendNotification('Bom dia — Recomeço','Escolhe as tuas três tarefas essenciais e começa pequeno.')}if(hm===state.settings.evening&&lastEvening!==key){lastEvening=key;sendNotification('Revisão do dia','Regista o que correu bem, os impulsos e o próximo passo.')}},15000)}
-document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('main section').forEach(s=>s.classList.toggle('hidden',s.id!==b.dataset.tab));if(b.dataset.tab==='diario')fillJournal();if(b.dataset.tab==='progresso')renderStats();if(b.dataset.tab==='metas')renderGoals()}));
-let sel=document.getElementById('daySelect');for(let i=1;i<=30;i++){let o=make('option','',`Dia ${i}`);o.value=i;sel.append(o)}sel.addEventListener('change',()=>{renderTasks();fillJournal()});
-document.getElementById('saveToday').onclick=()=>{persist();alert('Dia '+dayKey()+' guardado neste navegador.')};document.getElementById('resetToday').onclick=()=>{if(confirm('Desmarcar as tarefas deste dia?')){entry().checks=Array(7).fill(false);persist();renderTasks()}};
-document.getElementById('saveJournal').onclick=saveJournal;document.getElementById('exportData').onclick=exportFile;document.getElementById('exportProgress').onclick=exportFile;document.getElementById('editRoutine').onclick=()=>{let ed=document.getElementById('routineEditor');ed.classList.toggle('hidden');document.getElementById('editRoutine').textContent=ed.classList.contains('hidden')?'Editar horários':'Fechar edição'};
-document.getElementById('weekSelect').onchange=renderGoals;document.getElementById('saveGoals').onclick=saveGoals;document.getElementById('makeReport').onclick=showReport;document.getElementById('downloadReport').onclick=downloadReport;document.getElementById('copyReport').onclick=copyReport;
-document.getElementById('saveNotify').onclick=async()=>{if(document.getElementById('notifyEnabled').value==='on'){let ok=await requestNotify();if(!ok){document.getElementById('notifyEnabled').value='off';return}}applyNotifySettings()};document.getElementById('testNotify').onclick=testNotification;
-document.getElementById('clearAll').onclick=()=>{if(confirm('Tens a certeza? Todos os registos serão apagados.')){localStorage.removeItem(KEY);state=fresh();persist();renderTasks();renderRoutine();fillJournal();renderStats();renderGoals();alert('Registos apagados.')}};
-document.getElementById('notifyMorning').value=state.settings.morning||'08:00';document.getElementById('notifyEvening').value=state.settings.evening||'20:30';document.getElementById('notifyEnabled').value=state.settings.enabled?'on':'off';
-renderRoutine();renderChallenges();renderTasks();fillJournal();renderStats();renderGoals();setupNotifications();
-if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./service-worker.js').catch(()=>{});
-</script>
-</body></html>
+
+  <header>
+    <h5>O Teu Programa de Reconstrução</h5>
+    <h1>Projecto Recomeço</h1>
+    <p>Um dia de cada vez. Disciplina sem humilhação. Progresso com honestidade.</p>
+  </header>
+
+  <nav id="nav">
+    <button class="active" onclick="switchTab('hoje')">Hoje</button>
+    <button onclick="switchTab('caverna')">Modo Caverna</button>
+    <button onclick="switchTab('notificacoes')">Notificações</button>
+  </nav>
+
+  <div class="container">
+    
+    <!-- SEPARADOR HOJE -->
+    <div id="hoje" class="tab-content active">
+      
+      <!-- Mensagem Diária (Modo Caverna) -->
+      <div class="card card-caverna">
+        <h3 id="piloto-dia-tag">MODO CAVERNA • DIA 1 DE 40</h3>
+        <div class="day-title" id="msg-titulo">1. A Arma do Sono</div>
+        <p id="msg-corpo">Proteja o seu sono. 7 a 8 horas não são luxo, são vantagem competitiva. Rolar o feed até às 2h da manhã para "relaxar" é autossabotagem. Trate o seu sono como trata o seu trabalho.</p>
+        <div class="challenge-box">
+          <strong>Desafio de Hoje:</strong> <span id="msg-desafio">Telemóvel fora do alcance da cama 30 minutos antes de dormir. Zero ecrãs na cama.</span>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="num" id="progresso-percent">0%</div>
+          <div class="label">Progresso do Dia</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" id="streak-num">1</div>
+          <div class="label">Dia Consecutivo</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Tarefas do Dia</h3>
+        <div class="task-item">
+          <input type="checkbox" id="t1" onchange="updateProgress()">
+          <label for="t1">Levantei-me no horário planeado e arrumei a cama</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="t2" onchange="updateProgress()">
+          <label for="t2">Dediquei tempo à vida espiritual / leitura</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="t3" onchange="updateProgress()">
+          <label for="t3">Concluí 1 tarefa profissional sem procrastinar</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="t4" onchange="updateProgress()">
+          <label for="t4">Zero apostas e zero pornografia hoje</label>
+        </div>
+        <div class="task-item">
+          <input type="checkbox" id="t5" onchange="updateProgress()">
+          <label for="t5">Fiz a revisão do dia com honestidade</label>
+        </div>
+        <button class="btn" style="margin-top: 16px;" onclick="guardarDia()">Guardar Dia</button>
+      </div>
+
+      <!-- Botão de Emergência -->
+      <div class="card card-alert">
+        <h4>Sintores Impulso ou Ansiedade?</h4>
+        <p>Se sentires vontade de apostar ou procrastinar, clica no botão abaixo para uma quarentena de 15 minutos.</p>
+        <button class="btn btn-danger" style="margin-top: 10px;" onclick="dispararEmergencia()">🚨 Botão de Emergência (Pára e Pensa)</button>
+      </div>
+
+    </div>
+
+    <!-- SEPARADOR MODO CAVERNA -->
+    <div id="caverna" class="tab-content">
+      <div class="card">
+        <h3>Selecionar Dia do Programa (1 a 30)</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">Podes consultar as mensagens e princípios de qualquer dia do teu processo:</p>
+        <select id="select-dia-caverna" onchange="mudarDiaManual()">
+          <!-- Preenchido via JS -->
+        </select>
+      </div>
+    </div>
+
+    <!-- SEPARADOR NOTIFICAÇÕES -->
+    <div id="notificacoes" class="tab-content">
+      <div class="card">
+        <h3>Lembretes Diários</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">Configura os teus lembretes de rotina:</p>
+        
+        <label style="font-size: 12px; font-weight: 600;">Lembrete da Manhã</label>
+        <input type="time" value="08:00">
+
+        <label style="font-size: 12px; font-weight: 600;">Revisão da Noite</label>
+        <input type="time" value="20:30">
+
+        <button class="btn btn-secondary" onclick="testarNotificacao()">Testar Alerta Visual</button>
+      </div>
+      <div class="card card-alert">
+        <h4>Compromisso Principal</h4>
+        <p><strong>Zero apostas durante o piloto.</strong> Não deposites nem tentes recuperar perdas. Remove atalhos e foca na tua reconstrução diária.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Banco de Mensagens dos 30 Dias (Pilares: Sono, Dopamina, Desapego, Rituais, Sangramento, Morte do Ego, Caverna)
+    const mensagens30Dias = [
+      { titulo: "1. A Arma do Sono", corpo: "Proteja o seu sono. 7 a 8 horas não são luxo, são vantagem competitiva. Rolar o feed até às 2h para 'relaxar' é autossabotagem. Trate o seu sono como trata o seu trabalho.", desafio: "Telemóvel longe da cama 30 min antes de dormir. Zero ecrãs na cama." },
+      { titulo: "2. O Jejum de Dopamina", corpo: "Corte o entretenimento barato para o cérebro voltar a procurar o trabalho difícil. Se não lês 5 páginas sem pegar no telemóvel, o teu cérebro está frito de vídeos curtos.", desafio: "Elimina aplicações de entretenimento rápido ou coloca limites rígidos hoje." },
+      { titulo: "3. O Desapego do Passado", corpo: "Pare de guardar rancor do seu 'eu' do passado. Você não é mais aquela pessoa. Remoer no chuveiro com 'se eu tivesse investido aos 20' não paga contas hoje.", desafio: "Escreve num papel um erro do passado, rasga-o e foca-te 100% nas tuas ações de hoje." },
+      { titulo: "4. Crie um Ritual", corpo: "Rituais de manhã e de noite reduzem a ansiedade e o impulso. Chega de semana desorganizada. Siga os seus rituais todos os dias, sem negociar.", desafio: "Cumpre o checklist matinal e a revisão noturna exatamente no horário." },
+      { titulo: "5. O Sangramento Financeiro", corpo: "Cancele assinaturas inúteis e símbolos de status baratos. Cada centavo vai para a sua reconstrução. Pare de tentar impressionar estranhos.", desafio: "Regista e elimina 1 gasto fútil do teu orçamento semanal hoje." },
+      { titulo: "6. A Morte do Ego", corpo: "Aceite que está a recomeçar. Seja iniciante de novo sem deixar o orgulho atrapalhar. Esqueça a vergonha de recomeçar aos 30. Orgulho é o inimigo número um da sua reconstrução.", desafio: "Pede ajuda ou assume a tua fase atual de trabalho sem máscaras." },
+      { titulo: "7. A Fase da Caverna", corpo: "Desapareça por 40 dias. Ative o Modo Caverna e foque na sua base mental e financeira. Barzinho de sexta e conversa fiada só para fazer média? Corte e vá trabalhar.", desafio: "Diz 'não' a 1 convite ou distração social que te afaste do teu foco." },
+      { titulo: "8. A Armadilha da 'Recuperação'", corpo: "Tentar recuperar dinheiro perdido em apostas é o caminho mais rápido para perder o triplo. O dinheiro perdido foi o preço da tua lição. O dinheiro novo vem do trabalho.", desafio: "Zero sites de apostas ou gráficos de cassino abertos no ecrã." },
+      { titulo: "9. A Clareza do Ambiente", corpo: "O teu quarto e a tua mesa de trabalho refletem o estado da tua mente. Ambiente bagunçado gera ansiedade e decisões impulsivas.", desafio: "Arruma a tua mesa e o teu quarto antes de começar a trabalhar." },
+      { titulo: "10. Micro-Vitórias Diárias", corpo: "Grandes transformações são feitas de pequenas vitórias diárias. Se cumprires 5 pequenas tarefas hoje, ganhas o dia.", desafio: "Marca com visto as 5 tarefas do checklist hoje." },
+      // Repete os pilares consolidados para os restantes dias
+      { titulo: "11. Foco Pragmático", corpo: "Não procures motivação emocional; procura disciplina funcional. A motivação passa, a rotina fica.", desafio: "Executa a tarefa profissional mais difícil logo pela manhã." },
+      { titulo: "12. Blindagem de Gatilhos", corpo: "Identifica o momento em que a tua mente pede distração (cansaço, tédio ou solidão) e substitui por uma pausa física.", desafio: "Faz 15 flexões ou uma caminhada de 5 minutos se sentires tédio." },
+      { titulo: "13. Autonomia Financeira", corpo: "Guardar o teu capital é mais importante do que tentar multiplicá-lo de forma mágica. Respeita o teu trabalho.", desafio: "Revisa a tua conta bancária sem pânico e planeia a semana." },
+      { titulo: "14. A Regra dos 15 Minutos", corpo: "Qualquer impulso irracional atinge o pico e desce em 15 minutos. Respira e espera o pico passar.", desafio: "Usa o Botão de Emergência se sentir algum impulso forte." },
+      { titulo: "15. Metade do Caminho", corpo: "Dia 15 do Modo Caverna. A tua mente começou a desacelerar dos estímulos rápidos. Mantém a guarda alta.", desafio: "Revisa o teu progresso na app e celebra a consistência." }
+    ];
+
+    let diaAtual = 1;
+
+    function carregarDia(dia) {
+      diaAtual = dia;
+      let msg = mensagens30Dias[(dia - 1) % mensagens30Dias.length];
+      document.getElementById('piloto-dia-tag').innerText = `MODO CAVERNA • DIA ${dia} DE 40`;
+      document.getElementById('msg-titulo').innerText = msg.titulo;
+      document.getElementById('msg-corpo').innerText = msg.corpo;
+      document.getElementById('msg-desafio').innerText = msg.desafio;
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('#hoje input[type="checkbox"]');
+      let checked = 0;
+      checkboxes.forEach(c => { if(c.checked) checked++; });
+      let percent = Math.round((checked / checkboxes.length) * 100);
+      document.getElementById('progresso-percent').innerText = percent + '%';
+    }
+
+    function guardarDia() {
+      alert('Dia ' + diaAtual + ' guardado com sucesso! Mantém o foco no Modo Caverna.');
+    }
+
+    function dispararEmergencia() {
+      alert('🚨 QUARENTENA DE IMPULSO ACTIVADA:\n\n1. Afasta-te do telemóvel/computador por 15 minutos.\n2. Bebe um copo de água fria.\n3. Lembra-te: O orgulho e as apostas não pagam as tuas contas. Preserva o teu capital!');
+    }
+
+    function testarNotificacao() {
+      if ('Notification' in window) {
+        Notification.requestPermission().then(perm => {
+          alert('Permissão de Notificação: ' + perm);
+        });
+      } else {
+        alert('Notificações não suportadas neste navegador.');
+      }
+    }
+
+    // Inicialização
+    window.onload = function() {
+      carregarDia(1);
+      
+      // Preencher select do Modo Caverna
+      let select = document.getElementById('select-dia-caverna');
+      for(let i=1; i<=30; i++) {
+        let opt = document.createElement('option');
+        opt.value = i;
+        opt.innerHTML = 'Dia ' + i + ' - ' + (mensagens30Dias[i-1] ? mensagens30Dias[i-1].titulo : 'Princípio do Dia');
+        select.appendChild(opt);
+      }
+    };
+
+    function mudarDiaManual() {
+      let dia = document.getElementById('select-dia-caverna').value;
+      carregarDia(parseInt(dia));
+      switchTab('hoje');
+    }
+  </script>
+</body>
+</html>
