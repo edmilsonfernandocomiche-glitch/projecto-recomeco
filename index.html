@@ -8,7 +8,6 @@
   <meta name="theme-color" content="#0d1117">
   <style>
     :root {
-      /* Tema 1: Energia & Foco (Padrão) */
       --bg: #0d1117;
       --card: #161b22;
       --primary: #ff6b00;
@@ -22,7 +21,6 @@
     }
 
     [data-theme="vitoria"] {
-      /* Tema 2: Clareza & Vitória */
       --bg: #0a192f;
       --card: #112240;
       --primary: #ffb703;
@@ -36,7 +34,6 @@
     }
 
     [data-theme="caverna"] {
-      /* Tema 3: Caverna Vibrante */
       --bg: #f0fdf4;
       --card: #ffffff;
       --primary: #059669;
@@ -101,7 +98,6 @@
     .grid-30 div { background: var(--bg); border: 1px solid var(--border); padding: 10px 0; text-align: center; font-size: 12px; font-weight: 700; border-radius: 8px; color: var(--text); }
     .grid-30 div.active { background: var(--highlight); color: #000; border-color: var(--highlight); font-weight: 900; }
 
-    /* Estilos de Livros na Biblioteca */
     .book-card { border-left: 4px solid var(--primary); background: var(--card); border-radius: 10px; padding: 14px; margin-bottom: 12px; border: 1px solid var(--border); }
     .book-title { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 2px; }
     .book-author { font-size: 12px; color: var(--muted); margin-bottom: 8px; font-style: italic; }
@@ -121,7 +117,6 @@
 </head>
 <body data-theme="energia">
 
-  <!-- SELETOR DE TEMAS -->
   <div class="theme-selector">
     <span>🎨 Estilo Visual:</span>
     <div class="theme-btn-group">
@@ -149,15 +144,13 @@
 
   <div class="container">
     
-    <!-- SEPARADOR HOJE -->
     <div id="hoje" class="tab-content active">
-      
       <div class="card card-caverna">
         <h3 id="piloto-dia-tag">MODO CAVERNA • DIA 1 DE 30</h3>
         <div class="day-title" id="msg-titulo">1. A Arma do Sono</div>
-        <p id="msg-corpo">Proteja o seu sono. 7 a 8 horas não são luxo, são vantagem competitiva. Rolar o feed até às 2h para 'relaxar' é autossabotagem. Trate o seu sono como trata o seu trabalho.</p>
+        <p id="msg-corpo">Proteja o seu sono. 7 a 8 horas não são luxo, são vantagem competitiva. Rolar o feed até às 2h para 'relaxar' é autossabotagem.</p>
         <div class="challenge-box">
-          <strong>Desafio de Hoje:</strong> <span id="msg-desafio">Telemóvel fora do alcance da cama 30 minutos antes de dormir. Zero ecrãs na cama.</span>
+          <strong>Desafio de Hoje:</strong> <span id="msg-desafio">Telemóvel fora do alcance da cama 30 minutos antes de dormir.</span>
         </div>
       </div>
 
@@ -167,57 +160,42 @@
       </div>
 
       <div class="stat-grid">
-        <div class="stat-box">
-          <div class="num" id="progresso-percent">0%</div>
-          <div class="label">Progresso do Dia</div>
-        </div>
-        <div class="stat-box">
-          <div class="num" id="streak-num">1</div>
-          <div class="label">Dias Seguidos Completos</div>
-        </div>
+        <div class="stat-box"><div class="num" id="progresso-percent">0%</div><div class="label">Progresso do Dia</div></div>
+        <div class="stat-box"><div class="num" id="streak-num">1</div><div class="label">Dias Seguidos Completos</div></div>
       </div>
 
       <div class="card">
         <h3>Tarefas do Dia</h3>
         <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;" id="tarefas-status">0 de 5 tarefas concluídas</p>
-        
         <div class="task-item"><input type="checkbox" id="t1" onchange="updateProgress()"><label for="t1">Levantei-me no horário planeado e arrumei a cama</label></div>
         <div class="task-item"><input type="checkbox" id="t2" onchange="updateProgress()"><label for="t2">Dediquei tempo à minha vida espiritual</label></div>
         <div class="task-item"><input type="checkbox" id="t3" onchange="updateProgress()"><label for="t3">Concluí uma tarefa profissional sem procrastinar</label></div>
         <div class="task-item"><input type="checkbox" id="t4" onchange="updateProgress()"><label for="t4">Passei o dia sem apostar e sem pornografia</label></div>
         <div class="task-item"><input type="checkbox" id="t5" onchange="updateProgress()"><label for="t5">Fiz a revisão do dia com honestidade</label></div>
-
         <button class="btn" onclick="guardarDia()">Guardar o dia</button>
         <button class="btn btn-secondary" onclick="desmarcarTarefas()">Desmarcar tarefas</button>
       </div>
 
       <div class="card card-alert">
         <h4>🚨 Botão de Emergência (Pára e Pensa)</h4>
-        <p>Se sentires um impulso forte para apostar ou procrastinar, clica abaixo para ativar a tua quarentena mental de 15 minutos.</p>
+        <p>Se sentires um impulso forte para apostar ou procrastinar, ativa a tua quarentena mental de 15 minutos.</p>
         <button class="btn btn-danger" onclick="dispararEmergencia()">Activar Quarentena de Impulso</button>
       </div>
-
     </div>
 
-    <!-- SEPARADOR ROTINA EDITÁVEL -->
     <div id="rotina" class="tab-content">
       <div class="card">
         <h3>Rotina Diária Personalizada</h3>
         <p style="font-size: 12px; color: var(--muted); margin-bottom: 16px;">Ajusta os horários e blocos de tarefas à tua realidade:</p>
-        
         <div id="routine-container"></div>
-
         <button class="btn btn-secondary" onclick="adicionarItemRotina()">+ Adicionar Novo Bloco</button>
         <button class="btn" onclick="guardarRotinaPersonalizada()">Guardar Rotina</button>
       </div>
     </div>
 
-    <!-- SEPARADOR METAS SEMANAIS (AMPLIADO) -->
     <div id="metas" class="tab-content">
       <div class="card">
         <h3>Metas da Semana</h3>
-        <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">Compromissos inegociáveis para esta semana:</p>
-        
         <div class="task-item"><input type="checkbox" id="m1"><label for="m1">Manter 7 dias seguidos sem apostas e sem pornografia</label></div>
         <div class="task-item"><input type="checkbox" id="m2"><label for="m2">Cumprir os horários do sono pelo menos 5 dias</label></div>
         <div class="task-item"><input type="checkbox" id="m3"><label for="m3">Eliminar 1 sangramento financeiro / gasto inútil</label></div>
@@ -227,71 +205,45 @@
       </div>
     </div>
 
-    <!-- SEPARADOR DIÁRIO PESSOAL (ESTRUTURA ORIGINAL RESTAURADA) -->
     <div id="diario" class="tab-content">
       <div class="card">
         <h3>Diário pessoal</h3>
-        <p style="font-size: 12px; color: var(--muted); margin-bottom: 14px;">Regista a realidade, não aquilo que gostarias que tivesse acontecido.</p>
-
         <label style="font-size: 12px; font-weight: 600;">A que horas adormeceste?</label>
-        <select id="d-sono">
-          <option>22:00</option><option>23:00</option><option>00:00</option><option>01:00</option><option>02:00+</option>
-        </select>
-
+        <select id="d-sono"><option>22:00</option><option>23:00</option><option>00:00</option><option>01:00</option><option>02:00+</option></select>
         <label style="font-size: 12px; font-weight: 600;">A que horas acordaste?</label>
-        <select id="d-acorda">
-          <option>06:00</option><option>07:00</option><option>08:00</option><option>09:00</option><option>10:00+</option>
-        </select>
-
+        <select id="d-acorda"><option>06:00</option><option>07:00</option><option>08:00</option><option>09:00</option><option>10:00+</option></select>
         <label style="font-size: 12px; font-weight: 600;">Tempo de telefone recreativo:</label>
-        <select id="d-tel">
-          <option>Menos de 1 hora</option><option>1 a 2 horas</option><option>2 a 4 horas</option><option>Mais de 4 horas</option>
-        </select>
-
+        <select id="d-tel"><option>Menos de 1 hora</option><option>1 a 2 horas</option><option>2 a 4 horas</option><option>Mais de 4 horas</option></select>
         <label style="font-size: 12px; font-weight: 600;">Vontade de apostar / ceder a impulsos?</label>
-        <select id="d-impulso">
-          <option>Nenhuma</option><option>Ligeira</option><option>Forte (mas controlei)</option><option>Recaída</option>
-        </select>
-
+        <select id="d-impulso"><option>Nenhuma</option><option>Ligeira</option><option>Forte (mas controlei)</option><option>Recaída</option></select>
         <label style="font-size: 12px; font-weight: 600;">O que fiz para lidar com os impulsos?</label>
-        <textarea id="d-texto" rows="3" placeholder="Ex.: Afastei-me do telefone, fui caminhar, li na Biblioteca..."></textarea>
-
+        <textarea id="d-texto" rows="3" placeholder="Ex.: Afastei-me do telefone, fui caminhar..."></textarea>
         <button class="btn" onclick="guardarDiarioCompleto()">Guardar Diário</button>
       </div>
     </div>
 
-    <!-- SEPARADOR PROGRESSO (ESTRUTURA ORIGINAL RESTAURADA) -->
     <div id="progresso" class="tab-content">
       <div class="card">
         <h3>Progresso dos 30 dias</h3>
         <div class="stat-grid" style="margin-top: 12px;">
           <div class="stat-box"><div class="num" id="stat-dias-reg">1</div><div class="label">dias com registo</div></div>
           <div class="stat-box"><div class="num" id="stat-tarefas-conc">0</div><div class="label">tarefas concluídas</div></div>
-          <div class="stat-box"><div class="num" id="stat-dias-limpos">1</div><div class="label">dias sem apostas registados</div></div>
+          <div class="stat-box"><div class="num" id="stat-dias-limpos">1</div><div class="label">dias sem apostas</div></div>
           <div class="stat-box"><div class="num" id="stat-taxa">0%</div><div class="label">taxa de conclusão</div></div>
         </div>
-
         <h4 style="font-size: 13px; margin-top: 16px; margin-bottom: 8px;">Calendário de consistência</h4>
         <div class="grid-30" id="calendario-grid"></div>
-
-        <p style="font-size: 11px; color: var(--muted); margin-top: 12px; line-height: 1.4;">
-          Um dia completo significa todas as tarefas assinaladas. Um dia parcial também conta como progresso, mas não aumenta a sequência de dias perfeitos.
-        </p>
       </div>
     </div>
 
-    <!-- SEPARADOR BIBLIOTECA (RESTAURADA + PDF GUARDADO & TELA CHEIA) -->
     <div id="biblioteca" class="tab-content">
-      
       <div class="card">
         <h3>📖 Leitor de Livros em PDF</h3>
-        <p style="font-size: 12px; color: var(--muted); margin-bottom: 8px;">Adiciona um livro em PDF do telemóvel (fica guardado na app para leres quando quiseres):</p>
-        
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 8px;">Adiciona o PDF (fica guardado na app para ler offline):</p>
         <input type="file" id="pdf-input" accept="application/pdf" onchange="guardarELeitorPDF(event)">
-        
         <div id="pdf-container" class="pdf-viewer-container">
           <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-            <button class="btn btn-secondary" style="margin-top:0; font-size:12px; padding:8px;" onclick="toggleTelaCheiaPDF()">🖥️ Alternar Tela Cheia</button>
+            <button class="btn btn-secondary" style="margin-top:0; font-size:12px; padding:8px;" onclick="toggleTelaCheiaPDF()">🖥️ Tela Cheia</button>
             <button class="btn btn-danger" style="margin-top:0; font-size:12px; padding:8px;" onclick="removerPDFGuardado()">🗑️ Remover Livro</button>
           </div>
           <iframe id="pdf-frame" class="pdf-viewer"></iframe>
@@ -300,104 +252,64 @@
 
       <div class="card">
         <h3>💡 Resumos & Conceitos Chave</h3>
-        <p style="font-size: 12px; color: var(--muted); margin-bottom: 14px;">Pilares de mentalidade financeira, disciplina e psicologia para leitura diária:</p>
-
         <div class="book-card">
           <div class="book-title">O Homem Mais Rico da Babilónia</div>
           <div class="book-author">George S. Clason</div>
-          <div class="book-summary">A riqueza não depende do quanto ganhas, mas do quanto conservas e fazes trabalhar para ti.</div>
-          <ul class="book-bullets">
-            <li><strong>Regra do Ouro:</strong> Guarda pelo menos 10% de tudo o que ganhas antes de pagar contas.</li>
-            <li><strong>Protege o teu capital:</strong> Não invistas em esquemas de ganho rápido nem jogues. Controla os gastos.</li>
-            <li><strong>A sorte favorece quem age:</strong> A sorte é o encontro da preparação com a oportunidade.</li>
-          </ul>
+          <div class="book-summary">Guarda pelo menos 10% de tudo o que ganhas e protege o teu capital contra ganhos fáceis.</div>
         </div>
-
         <div class="book-card">
           <div class="book-title">Trading in the Zone</div>
           <div class="book-author">Mark Douglas</div>
-          <div class="book-summary">A chave do sucesso nos mercados e negócios é o domínio total do medo e da ganância.</div>
-          <ul class="book-bullets">
-            <li><strong>Aceita o Risco:</strong> Cada decisão tem um resultado incerto. Nunca arrisques o dinheiro essencial.</li>
-            <li><strong>Pensar em Probabilidades:</strong> Elimina a ansiedade de "recuperar perdas". Aceita a perda como custo.</li>
-            <li><strong>Mente sem Ilusões:</strong> O mercado não te deve nada. A disciplina emocional é a tua única vantagem.</li>
-          </ul>
+          <div class="book-summary">Aceita o risco e pensa em probabilidades. O mercado não te deve nada.</div>
         </div>
-
         <div class="book-card">
           <div class="book-title">A Psicologia Financeira</div>
           <div class="book-author">Morgan Housel</div>
-          <div class="book-summary">Gerir bem o dinheiro tem pouco a ver com inteligência e muito a ver com o teu comportamento.</div>
-          <ul class="book-bullets">
-            <li><strong>A Riqueza é o que não vês:</strong> Riqueza é o dinheiro acumulado, não o gasto em símbolos de status.</li>
-            <li><strong>Margem de Segurança:</strong> Mantém sempre uma reserva de emergência. O maior erro é depender da sorte.</li>
-            <li><strong>Saber dizer "Suficiente":</strong> A ganância insaciável faz pessoas arriscarem o que precisam.</li>
-          </ul>
+          <div class="book-summary">A riqueza é o dinheiro que não gastas em símbolos de status. Sabe dizer suficiente.</div>
         </div>
-
         <div class="book-card">
           <div class="book-title">Hábitos Atómicos</div>
           <div class="book-author">James Clear</div>
-          <div class="book-summary">Mudanças de 1% todos os dias geram transformações gigantescas ao longo do tempo.</div>
-          <ul class="book-bullets">
-            <li><strong>Foca no Sistema:</strong> A tua rotina diária determina o teu resultado a longo prazo.</li>
-            <li><strong>Muda a tua Identidade:</strong> Diz "eu sou uma pessoa disciplinada", não "estou a tentar mudar".</li>
-            <li><strong>Torna o mau hábito difícil:</strong> Bloqueia atalhos e elimina os gatilhos dos vícios.</li>
-          </ul>
+          <div class="book-summary">Foca no sistema diário e muda a tua identidade para uma pessoa disciplinada.</div>
         </div>
-
         <div class="book-card">
           <div class="book-title">O Ego é Seu Inimigo</div>
           <div class="book-author">Ryan Holiday</div>
-          <div class="book-summary">O orgulho e a vaidade destroçam planos e impedem o recomeço verdadeiro.</div>
-          <ul class="book-bullets">
-            <li><strong>Seja um estudante permanente:</strong> Aceita recomeçar com humildade e sem vergonha.</li>
-            <li><strong>Trabalhe em silêncio:</strong> Menos conversa e promessas, mais execução prática.</li>
-            <li><strong>Sem desculpas:</strong> Assume a responsabilidade total pelas tuas ações e decisões.</li>
-          </ul>
+          <div class="book-summary">Trabalha em silêncio com humildade total. Sem desculpas nem vaidade.</div>
         </div>
-
       </div>
-
     </div>
 
-    <!-- SEPARADOR NOTIFICAÇÕES -->
     <div id="notificacoes" class="tab-content">
       <div class="card">
         <h3>🔔 Alarmes & Lembretes da App</h3>
-        <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">Ativa os avisos para te manteres focado nos momentos certos do dia:</p>
-        <button class="btn btn-secondary" onclick="solicitarPermissaoNotificacao()">1. Ativar Permissão de Notificação</button>
-        <div style="margin-top: 16px;">
-          <label style="font-size: 12px; font-weight: 600;">Lembrete de Início do Dia (Manhã)</label>
-          <input type="time" id="alerta-manha" value="08:00">
-          <label style="font-size: 12px; font-weight: 600;">Lembrete de Leitura & Foco (Tarde)</label>
-          <input type="time" id="alerta-tarde" value="14:00">
-          <label style="font-size: 12px; font-weight: 600;">Lembrete de Revisão Noturna (Noite)</label>
-          <input type="time" id="alerta-noite" value="20:30">
-          <button class="btn" onclick="alert('Horários de alerta guardados!')">Guardar Horários de Alerta</button>
-        </div>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">Define os teus horários de aviso:</p>
+        <input type="time" id="alerta-manha" value="08:00">
+        <input type="time" id="alerta-tarde" value="14:00">
+        <input type="time" id="alerta-noite" value="20:30">
+        <button class="btn" onclick="alert('Horários guardados!')">Guardar Horários</button>
       </div>
     </div>
 
   </div>
 
   <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW error:', err));
+      });
+    }
+
     const mensagens30Dias = [
       { titulo: "1. A Arma do Sono", corpo: "Proteja o seu sono. 7 a 8 horas não são luxo, são vantagem competitiva. Rolar o feed até às 2h para 'relaxar' é autossabotagem.", desafio: "Telemóvel fora do alcance da cama 30 minutos antes de dormir." },
-      { titulo: "2. O Jejum de Dopamina", corpo: "Corte o entretenimento barato para o cérebro voltar a procurar o trabalho difícil.", desafio: "Corta redes sociais e vídeos curtos durante todo o dia de hoje." },
-      { titulo: "3. O Desapego do Passado", corpo: "Pare de guardar rancor do seu 'eu' do passado. Remoer o passado não paga contas hoje.", desafio: "Foca 100% nas tuas decisões de hoje." }
+      { titulo: "2. O Jejum de Dopamina", corpo: "Corte o entretenimento barato para o cérebro voltar a procurar o trabalho difícil.", desafio: "Corta redes sociais e vídeos curtos hoje." },
+      { titulo: "3. O Desapego do Passado", corpo: "Pare de guardar rancor do seu eu do passado. Foca 100% nas tuas decisões de hoje.", desafio: "Assume o controlo do momento presente." }
     ];
 
     let rotinaPadrao = [
       { hora: "08:00", tarefa: "Acordar, água e arrumar a cama" },
       { hora: "08:05", tarefa: "Oração e leitura espiritual" },
-      { hora: "08:30", tarefa: "Higiene e movimento leve" },
-      { hora: "08:45", tarefa: "Escolher três tarefas essenciais" },
-      { hora: "09:00", tarefa: "Bloco de trabalho focado ou procura de rendimento" },
-      { hora: "12:00", tarefa: "Resolver obrigação pessoal" },
-      { hora: "14:00", tarefa: "Leitura de 15 min na Biblioteca / Estudo" },
-      { hora: "20:30", tarefa: "Revisão do dia e registo no Diário" },
-      { hora: "22:30", tarefa: "Reduzir telefone e preparar descanso" }
+      { hora: "09:00", tarefa: "Bloco de trabalho focado" }
     ];
 
     let diaAtual = 1;
@@ -427,7 +339,6 @@
       const container = document.getElementById('routine-container');
       container.innerHTML = '';
       let rotinaSalva = JSON.parse(localStorage.getItem('minhaRotina')) || rotinaPadrao;
-      
       rotinaSalva.forEach((item, index) => {
         const div = document.createElement('div');
         div.className = 'routine-edit-item';
@@ -446,7 +357,7 @@
       div.className = 'routine-edit-item';
       div.innerHTML = `
         <input type="time" value="12:00" class="r-hora">
-        <input type="text" placeholder="Nova tarefa da rotina..." class="r-tarefa">
+        <input type="text" placeholder="Nova tarefa..." class="r-tarefa">
         <button style="background:none; border:none; color:var(--danger); font-weight:bold; font-size:16px; cursor:pointer;" onclick="this.parentElement.remove()">✕</button>
       `;
       container.appendChild(div);
@@ -463,11 +374,9 @@
       const horas = document.querySelectorAll('.r-hora');
       const tarefas = document.querySelectorAll('.r-tarefa');
       let novaRotina = [];
-      horas.forEach((h, i) => { 
-        if(tarefas[i].value.trim() !== "") novaRotina.push({ hora: h.value, tarefa: tarefas[i].value }); 
-      });
+      horas.forEach((h, i) => { if(tarefas[i].value.trim() !== "") novaRotina.push({ hora: h.value, tarefa: tarefas[i].value }); });
       localStorage.setItem('minhaRotina', JSON.stringify(novaRotina));
-      alert('Rotina diária guardada com sucesso!');
+      alert('Rotina guardada!');
     }
 
     function updateProgress() {
@@ -481,25 +390,22 @@
       document.getElementById('stat-taxa').innerText = percent + '%';
     }
 
-    function guardarDia() { alert(`Dia ${diaAtual} guardado com sucesso!`); }
+    function guardarDia() { alert(`Dia ${diaAtual} guardado!`); }
     function desmarcarTarefas() { document.querySelectorAll('#hoje input[type="checkbox"]').forEach(c => c.checked = false); updateProgress(); }
     function dispararEmergencia() { alert('🚨 QUARENTENA DE IMPULSO ACTIVADA: Afasta-te do ecrã por 15 minutos!'); }
     function mudarDiaPrograma() { carregarDia(parseInt(document.getElementById('select-dia-main').value)); }
 
-    /* Guarda e Carrega PDF Localmente */
     function guardarELeitorPDF(event) {
       const file = event.target.files[0];
       if (file && file.type === "application/pdf") {
         const reader = new FileReader();
         reader.onload = function(e) {
-          const base64PDF = e.target.result;
           try {
-            localStorage.setItem('meuPDFGuardado', base64PDF);
-            exibirPDF(base64PDF);
-            alert("Livro guardado na Biblioteca do teu app com sucesso!");
+            localStorage.setItem('meuPDFGuardado', e.target.result);
+            exibirPDF(e.target.result);
+            alert("Livro guardado na app com sucesso para leitura offline!");
           } catch(err) {
             exibirPDF(URL.createObjectURL(file));
-            alert("O livro abriu normalmente! (Para ficheiros muito grandes, carrega quando fores ler).");
           }
         };
         reader.readAsDataURL(file);
@@ -508,44 +414,30 @@
 
     function exibirPDF(src) {
       const frame = document.getElementById("pdf-frame");
-      const container = document.getElementById("pdf-container");
       frame.src = src;
-      container.style.display = "block";
+      document.getElementById("pdf-container").style.display = "block";
     }
 
     function carregarPDFGuardado() {
       const pdf = localStorage.getItem('meuPDFGuardado');
-      if (pdf) {
-        exibirPDF(pdf);
-      }
+      if (pdf) exibirPDF(pdf);
     }
 
     function removerPDFGuardado() {
       localStorage.removeItem('meuPDFGuardado');
       document.getElementById("pdf-container").style.display = "none";
       document.getElementById("pdf-frame").src = "";
-      alert("Livro removido da memória do app.");
+      alert("Livro removido.");
     }
 
     function toggleTelaCheiaPDF() {
-      const frame = document.getElementById("pdf-frame");
-      frame.classList.toggle("pdf-fullscreen");
+      document.getElementById("pdf-frame").classList.toggle("pdf-fullscreen");
     }
 
-    function guardarDiarioCompleto() {
-      alert("Registo do diário guardado com sucesso!");
-    }
-
-    function solicitarPermissaoNotificacao() {
-      if ('Notification' in window) {
-        Notification.requestPermission().then(p => alert('Permissão: ' + p));
-      }
-    }
+    function guardarDiarioCompleto() { alert("Diário guardado com sucesso!"); }
 
     window.onload = function() {
-      let temaSalvo = localStorage.getItem('meuTema') || 'energia';
-      mudarTema(temaSalvo);
-
+      mudarTema(localStorage.getItem('meuTema') || 'energia');
       let selectMain = document.getElementById('select-dia-main');
       let gridCal = document.getElementById('calendario-grid');
 
